@@ -14,18 +14,27 @@ CREATE TABLE students (
     full_name VARCHAR(30), 
     grade VARCHAR(10),
     parent_id INT,
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    FOREIGN KEY (parent_id) REFERENCES parents(id)
     );
 
 CREATE TABLE subjects (
     id INT PRIMARY KEY,
     title VARCHAR(30),
     student_id INT,
-    FOREIGN KEY (student_id) REFERENCES student(id)
+    parent_id INT,
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (parent_id) REFERENCES parents(id)
 );
 
 CREATE TABLE activity (
     id INT PRIMARY KEY,
     activity_description VARCHAR(30),
-    duration int
+    duration INT,
+    subject_id INT,
+    student_id INT,
+    parent_id INT,
+	FOREIGN KEY (subject_id) REFERENCES subjects(id),
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (parent_id) REFERENCES parents(id)
+    
 );
